@@ -47,7 +47,7 @@ router.delete('/api/shopping', (req, res) => {
     if(req.body.id) {
         ShoppingList.deleteOne({_id : req.body.id})
         .then(result => res.json({
-            msg: `Success! Record with id ${req.body.id}`,
+            msg: `Success! Record with id ${req.body.id} deleted`,
             data: result
         }))
         .catch(err => res.status(400).json({
