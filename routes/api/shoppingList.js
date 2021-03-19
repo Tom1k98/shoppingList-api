@@ -24,6 +24,9 @@ router.post('/api/shopping', (req, res) => {
             item : req.body.item,
             quantity: req.body.quantity ? req.body.quantity : 1
         })
+        if (req.body.price) {
+            newItem.price = req.body.price
+        }
         newItem.save()
         .then(data => {
             res.json({
