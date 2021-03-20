@@ -57,6 +57,26 @@ router.delete('/', (req, res) => {
     }
 })
 
+// update item
+router.post('/update', (req, res) => {
+    ShoppingList.findOneAndUpdate({
+        _id : req.body.id
+    },
+    {
+        $set: {
+            quantity : req.body.quantity ? req.body.quantity : quantity,
+            // item : req.body.item ? req.body.item : item,
+            // price : req.body.price ? req.body.price : price
+        }
+    }, {new: true})
+    .then(data => {
+        res.json({
+            msg: `Success! item Updated`,
+            data: data
+        })
+    })
+})
+
 
 // export router
 module.exports = router;
