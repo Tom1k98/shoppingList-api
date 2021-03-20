@@ -5,7 +5,7 @@ const router = express.Router()
 // get mongo model
 const ShoppingList = require('../../models/ShoppingList')
 
-router.get('/api/shopping', (req, res) => {
+router.get('/', (req, res) => {
     ShoppingList.find()
     .then(data => {
         res.json({data: data})
@@ -16,7 +16,7 @@ router.get('/api/shopping', (req, res) => {
 )
 })
 
-router.post('/api/shopping', (req, res) => {
+router.post('/', (req, res) => {
     if(!req.body.item) {
         res.status(400).json({err: 'You need to specify item to add'})
     } else {
@@ -43,7 +43,7 @@ router.post('/api/shopping', (req, res) => {
     }
 })
 
-router.delete('/api/shopping', (req, res) => {
+router.delete('/', (req, res) => {
     if(req.body.id) {
         ShoppingList.deleteOne({_id : req.body.id})
         .then(result => res.json({

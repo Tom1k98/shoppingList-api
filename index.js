@@ -6,7 +6,6 @@ const app = express()
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
 
-
 //alow Cross origin requests
 const cors = require('cors')
 app.use(cors())
@@ -27,7 +26,7 @@ db.once('open', () => console.log('connection to db successfull'))
 
 //route 
 const shoppingListRoute = require('./routes/api/shoppingList')
-app.use('/', shoppingListRoute)
+app.use('/api/shopping', shoppingListRoute)
 
 // start express server
 const PORT = process.env.PORT || 5000
