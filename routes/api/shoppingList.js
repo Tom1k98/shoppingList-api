@@ -59,22 +59,29 @@ router.delete('/', (req, res) => {
 
 // update item
 router.post('/update', (req, res) => {
-    ShoppingList.findOneAndUpdate({
-        _id : req.body.id
-    },
-    {
-        $set: {
-            quantity : req.body.quantity ? req.body.quantity : quantity,
-            // item : req.body.item ? req.body.item : item,
-            // price : req.body.price ? req.body.price : price
-        }
-    }, {new: true})
+    const filter = {_id : req.body.id}
+    let update = {}
+    if(req.body.quantity) {
+        update['quantity'] = req.body.quantity
+    }
+    if(req.body.price) {
+        update['price'] = req.body.price
+    }
+    if(req.body.item) {
+        update['item'] = req.body.item
+    }
+    ShoppingList.findOneAndUpdate(filter, update, {new: true})
     .then(data => {
         res.json({
             msg: `Success! item Updated`,
             data: data
         })
     })
+    .catch(err => {
+        res.status(400).json({
+        msg: 'Error! something went wrong',
+        error: err
+    })})
 })
 
 
