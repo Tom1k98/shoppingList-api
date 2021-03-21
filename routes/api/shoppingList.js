@@ -62,13 +62,13 @@ router.post('/update', (req, res) => {
     const filter = {_id : req.body.id}
     let update = {}
     if(req.body.quantity) {
-        update['quantity'] = req.body.quantity
+        update.quantity = req.body.quantity
     }
     if(req.body.price) {
-        update['price'] = req.body.price
+        update.price = req.body.price
     }
     if(req.body.item) {
-        update['item'] = req.body.item
+        update.item = req.body.item
     }
     ShoppingList.findOneAndUpdate(filter, update, {new: true})
     .then(data => {
